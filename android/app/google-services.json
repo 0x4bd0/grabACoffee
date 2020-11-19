@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "558499389370",
+    "firebase_url": "https://grabacoffee-57dd1.firebaseio.com",
+    "project_id": "grabacoffee-57dd1",
+    "storage_bucket": "grabacoffee-57dd1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:558499389370:android:09b23456d02b7baa2fc783",
+        "android_client_info": {
+          "package_name": "com.abdoumjr.flutter_firebase_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "558499389370-3ssvp6gl6ji3srt3u07j5idhes0u2gk2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBn5mVOBU8tfmG-QeLEnDVU82_rQY1-DkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "558499389370-3ssvp6gl6ji3srt3u07j5idhes0u2gk2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "558499389370-8t1lsfbkf4r2cprovmik0kn30qno4pmv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterFirebaseApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -45,6 +45,8 @@ class _SignUpState extends State<SignUp> {
             key : _form_key,
             child: 
              Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               crossAxisAlignment: CrossAxisAlignment.center,
                children : <Widget>[
                TextFormField( 
                  decoration: textFormFieldDecoration.copyWith(hintText: 'Email'),
@@ -67,9 +69,10 @@ class _SignUpState extends State<SignUp> {
                  obscureText: true,
                ),
                SizedBox(height : 20),
-               RaisedButton(
+               RaisedButton.icon(
                  color : Colors.blue[500],
-                 child : Text('Register'),
+                 icon : Icon(Icons.supervised_user_circle_outlined),
+                 label : Text('Register'),
                  onPressed: () async{
                  if(_form_key.currentState.validate()){
                    dynamic res  = await _auth.signUp(email, password);
@@ -81,6 +84,7 @@ class _SignUpState extends State<SignUp> {
                  }
                  },
                ),
+               SizedBox(height : 20),
                Text(error,
                 style:TextStyle(color:Colors.red[400])),
                ]

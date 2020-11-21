@@ -44,6 +44,8 @@ class _SignInState extends State<SignIn> {
             key : _form_key,
             child: 
              Column(
+               mainAxisAlignment: MainAxisAlignment.center,
+               crossAxisAlignment: CrossAxisAlignment.center,
                children : <Widget>[
                TextFormField( 
                  decoration: textFormFieldDecoration.copyWith(hintText: 'Email'),
@@ -66,9 +68,10 @@ class _SignInState extends State<SignIn> {
                  obscureText: true,
                ),
                SizedBox(height : 20),
-               RaisedButton(
-                 color : Colors.green[500],
-                 child : Text('Login'),
+               RaisedButton.icon(
+                 icon : Icon(Icons.login),
+                 color : Colors.cyan[600],
+                 label : Text('Login'),
                  onPressed: () async{
                  if(_form_key.currentState.validate()){
                    dynamic res = await _auth.signIn(email, password);

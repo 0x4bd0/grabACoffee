@@ -17,6 +17,7 @@ class _SignInState extends State<SignIn> {
   final GlobalKey<FormState>  _form_key = GlobalKey<FormState> ();
   String email = '';
   String password = '';
+  String error = '';
 
   @override
   Widget build(BuildContext context) {
@@ -69,10 +70,18 @@ class _SignInState extends State<SignIn> {
                  child : Text('Login'),
                  onPressed: () async{
                  if(_form_key.currentState.validate()){
-                   print('test');
+                   dynamic res = await _auth.signIn(email, password);
+                   if( res != null){
+                     setState(() {
+                       error = res['error'];
+                     });
+                   }
                  }
                 },
-               )
+               ),
+                SizedBox(height : 20),
+                Text(error,
+                style:TextStyle(color:Colors.red[400])),
                ]
              )
           ,),

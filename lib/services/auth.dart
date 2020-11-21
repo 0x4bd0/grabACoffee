@@ -31,7 +31,20 @@ class AuthService {
     }
   }
 
-
+  // sign in
+  Future signIn(String email, String password) async {
+    print(email);
+    print(password);
+   try{
+     AuthResult res = await _auth.signInWithEmailAndPassword(email: email, password: password);
+     FirebaseUser user = res.user;
+    return _user(user);
+    }
+    catch(err){
+    print(err.toString());
+    return {'status' : false, 'error' : err.toString()};
+    }
+  }
   
   // sign up 
   Future signUp(String email, String password) async {
@@ -43,7 +56,7 @@ class AuthService {
     }
     catch(err){
     print(err.toString());
-    return null;
+    return {'status' : false, 'error' : err.toString()};
     }
 
   }

@@ -24,7 +24,6 @@ class _SignInState extends State<SignIn> {
           child : Text('Sign in annoymously', style:TextStyle( color :Colors.white)),
           onPressed: () async{
             dynamic res  = await _auth.singInAnony();
-            print(res);
           },
         )
       ),

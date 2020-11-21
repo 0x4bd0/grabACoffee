@@ -16,6 +16,7 @@ class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
   final GlobalKey<FormState>  _form_key = GlobalKey<FormState> ();
   String email = '';
+  String error = '';
   String password = '';
 
 
@@ -70,10 +71,17 @@ class _SignUpState extends State<SignUp> {
                  child : Text('Register'),
                  onPressed: () async{
                  if(_form_key.currentState.validate()){
-                   await _auth.signUp(email, password);
+                   dynamic res  = await _auth.signUp(email, password);
+                   if( res != null){
+                     setState(() {
+                       error = res['error'];
+                     });
+                   }
                  }
                  },
-               )
+               ),
+               Text(error,
+                style:TextStyle(color:Colors.red[400])),
                ]
              )
           ,),

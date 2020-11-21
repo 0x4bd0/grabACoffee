@@ -84,12 +84,10 @@ class _SignUpState extends State<SignUp> {
                        loading = true;
                      });
                    dynamic res  = await _auth.signUp(email, password);
-                    setState(() {
-                       loading = false;
-                     });
-                   if( res != null){
+                   if(!res['status']){
                      setState(() {
                        error = res['error'];
+                       loading = false;
                      });
                    }
                  }

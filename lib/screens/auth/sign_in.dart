@@ -86,7 +86,7 @@ class _SignInState extends State<SignIn> {
                    if(!res['status']){
                      setState(() {
                        error = res['error'];
-                       loading = true;
+                       loading = false;
                      });
                    }
                  }

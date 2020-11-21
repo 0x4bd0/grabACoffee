@@ -70,7 +70,7 @@ class _SignUpState extends State<SignUp> {
                  child : Text('Register'),
                  onPressed: () async{
                  if(_form_key.currentState.validate()){
-                   print('test');
+                   await _auth.signUp(email, password);
                  }
                  },
                )

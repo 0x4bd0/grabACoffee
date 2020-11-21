@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_app/services/auth.dart';
+import 'package:flutter_firebase_app/styles/text_form_field.dart';
 
 class SignUp extends StatefulWidget {
 
@@ -46,7 +47,7 @@ class _SignUpState extends State<SignUp> {
              Column(
                children : <Widget>[
                TextFormField( 
-                 decoration: InputDecoration(hintText: 'Email'),
+                 decoration: textFormFieldDecoration.copyWith(hintText: 'Email'),
                  validator : (value) => value.isEmpty ? 'Enter your email' : null,
                  onChanged: (value) {
                    setState(() {
@@ -56,7 +57,7 @@ class _SignUpState extends State<SignUp> {
                ),
                SizedBox(height : 20),
                TextFormField(
-                 decoration: InputDecoration(hintText: 'Password'),
+                 decoration: textFormFieldDecoration.copyWith(hintText: 'Password'),
                  validator : (value) => value.isEmpty ? 'Password must be 6 chars or more' : null,
                  onChanged: (value) {
                    setState(() {
@@ -67,7 +68,7 @@ class _SignUpState extends State<SignUp> {
                ),
                SizedBox(height : 20),
                RaisedButton(
-                 color : Colors.brown[500],
+                 color : Colors.blue[500],
                  child : Text('Register'),
                  onPressed: () async{
                  if(_form_key.currentState.validate()){

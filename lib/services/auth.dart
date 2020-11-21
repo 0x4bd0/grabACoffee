@@ -38,7 +38,7 @@ class AuthService {
    try{
      AuthResult res = await _auth.signInWithEmailAndPassword(email: email, password: password);
      FirebaseUser user = res.user;
-    return _user(user);
+    return {'status':true, user :_user(user)};
     }
     catch(err){
     print(err.toString());
@@ -52,7 +52,7 @@ class AuthService {
     try{
      AuthResult res = await _auth.createUserWithEmailAndPassword(email: email, password: password);
      FirebaseUser user = res.user;
-    return _user(user);
+    return {'status':true, user :_user(user)};
     }
     catch(err){
     print(err.toString());

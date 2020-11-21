@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_app/loader.dart';
 import 'package:flutter_firebase_app/services/auth.dart';
 import 'package:flutter_firebase_app/styles/text_form_field.dart';
 
@@ -19,9 +20,13 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
   String error = '';
+  bool loading = false;
 
   @override
   Widget build(BuildContext context) {
+    if(loading) {
+      return Loading();
+    }
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
@@ -74,10 +79,14 @@ class _SignInState extends State<SignIn> {
                  label : Text('Login'),
                  onPressed: () async{
                  if(_form_key.currentState.validate()){
+                     setState(() {
+                       loading = true;
+                     });
                    dynamic res = await _auth.signIn(email, password);
-                   if( res != null){
+                   if(!res['status']){
                      setState(() {
                        error = res['error'];
+                       loading = true;
                      });
                    }
                  }

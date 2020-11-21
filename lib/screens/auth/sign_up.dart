@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_firebase_app/services/auth.dart';
 import 'package:flutter_firebase_app/styles/text_form_field.dart';
+import 'package:flutter_firebase_app/loader.dart';
 
 class SignUp extends StatefulWidget {
 
@@ -19,10 +20,14 @@ class _SignUpState extends State<SignUp> {
   String email = '';
   String error = '';
   String password = '';
+  bool loading = false;
 
 
   @override
   Widget build(BuildContext context) {
+      if(loading) {
+      return Loading();
+    }
     return Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
@@ -75,7 +80,13 @@ class _SignUpState extends State<SignUp> {
                  label : Text('Register'),
                  onPressed: () async{
                  if(_form_key.currentState.validate()){
+                   setState(() {
+                       loading = true;
+                     });
                    dynamic res  = await _auth.signUp(email, password);
+                    setState(() {
+                       loading = false;
+                     });
                    if( res != null){
                      setState(() {
                        error = res['error'];

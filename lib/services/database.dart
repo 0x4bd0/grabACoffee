@@ -31,8 +31,23 @@ class Database {
    }).toList();
   }
 
-  Stream<List<CoffeeModel>> get coffees {
-    return coffeesCollection.snapshots().map(_coffeee);
+    CoffeeModel _myCoffeee( DocumentSnapshot snapshot ) {
+
+     return CoffeeModel(
+       name : snapshot.data['name'] ?? '',
+       sugar : snapshot.data['sugar'] ?? '0',
+       strength: snapshot.data['strength'] ?? 100
+     );
+  }
+
+  
+
+    Stream<List<CoffeeModel>> get coffees {
+      return coffeesCollection.snapshots().map(_coffeee);
+    }
+
+    Stream<CoffeeModel> get myCoffee {
+    return coffeesCollection.document(uid).snapshots().map(_myCoffeee);
   }
 
 }

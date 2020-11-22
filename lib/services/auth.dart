@@ -39,7 +39,7 @@ class AuthService {
    try{
      AuthResult res = await _auth.signInWithEmailAndPassword(email: email, password: password);
      FirebaseUser user = res.user;
-     await Database(uid:user.uid).updateUserData('0', 'alpha', 100);
+     await Database(uid:user.uid).updateUserData('0', 'alpha', 100,user.uid);
     return {'status':true, user :_user(user)};
     }
     catch(err){
@@ -56,7 +56,7 @@ class AuthService {
      FirebaseUser user = res.user;
 
      //create coffee
-     await Database(uid:user.uid).updateUserData('0', 'alpha', 100);
+     await Database(uid:user.uid).updateUserData('0', 'alpha', 100,user.uid);
     return {'status':true, user :_user(user)};
     }
     catch(err){

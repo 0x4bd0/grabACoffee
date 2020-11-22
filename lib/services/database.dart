@@ -11,12 +11,13 @@ class Database {
 
   final CollectionReference coffeesCollection = Firestore.instance.collection('coffees');
 
-  Future updateUserData (String sugar, String name, int strength) async {
-  
+  Future updateUserData (String sugar, String name, int strength, String uid) async {
+
   return await coffeesCollection.document(uid).setData({
     'sugar' : sugar,
     'name' : name,
-    'strength' : strength
+    'strength' : strength,
+    'uid' : uid
   });
 
   }
@@ -26,7 +27,8 @@ class Database {
      return CoffeeModel(
        name : item.data['name'] ?? '',
        sugar : item.data['sugar'] ?? '0',
-       strength: item.data['strength'] ?? 100
+       strength: item.data['strength'] ?? 100,
+       uid : item.data['uid'] ?? '',
      );
    }).toList();
   }
@@ -36,7 +38,8 @@ class Database {
      return CoffeeModel(
        name : snapshot.data['name'] ?? '',
        sugar : snapshot.data['sugar'] ?? '0',
-       strength: snapshot.data['strength'] ?? 100
+       strength: snapshot.data['strength'] ?? 10,
+       uid : snapshot.data['uid'] ?? '',
      );
   }
 

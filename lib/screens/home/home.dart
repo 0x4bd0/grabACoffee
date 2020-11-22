@@ -25,32 +25,40 @@ class Home extends StatelessWidget {
 
       return StreamProvider<List<CoffeeModel>>.value(
       value : Database().coffees,
-      child :  Scaffold(
-      backgroundColor: Colors.brown[100],
-      appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.brown[300],
-        title: Text('Home'),
-        actions : <Widget>[
-          FlatButton.icon(
-            icon : Icon(Icons.person),
-            onPressed: () async{
-               await _auth.signOut();
-            },
-            label : Text('logout')
-          )
-        ]
+      child :  Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: NetworkImage('https://previews.123rf.com/images/ruigsantos/ruigsantos1109/ruigsantos110900003/10461027-a-frame-made-of-coffee-beans-with-isolated-background-.jpg'),
+          fit: BoxFit.fitHeight,
         ),
-      body: Center(
-        child : CoffeesList()
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.edit),
-        onPressed: () {
-          _editCoffee();
-        },
+        child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.brown[300],
+          title: Text('Home'),
+          actions : <Widget>[
+            FlatButton.icon(
+              icon : Icon(Icons.person),
+              onPressed: () async{
+                 await _auth.signOut();
+              },
+              label : Text('logout')
+            )
+          ]
+          ),
+        body: Center(
+          child : CoffeesList()
         ),
-    )
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.edit),
+          onPressed: () {
+            _editCoffee();
+          },
+          ),
+    ),
+      )
     );
 
   }

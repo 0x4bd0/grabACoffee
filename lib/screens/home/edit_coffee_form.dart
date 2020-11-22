@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_firebase_app/models/coffee.dart';
 import 'package:flutter_firebase_app/models/user.dart';
 import 'package:flutter_firebase_app/services/database.dart';
+import 'package:flutter_firebase_app/small_loader.dart';
 import 'package:flutter_firebase_app/styles/text_form_field.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_firebase_app/loader.dart';
@@ -23,6 +24,7 @@ class _EditCoffeeFormState extends State<EditCoffeeForm> {
   String sugar;
   int strength;
   String error = '';
+  bool loading = false;
 
   List<String> sugarList = ['0','1','2','3','4','5'];
 
@@ -30,12 +32,18 @@ class _EditCoffeeFormState extends State<EditCoffeeForm> {
   Widget build(BuildContext context) {
 
     final user = Provider.of<UserModel>(context);
+    final db  = Database(uid:user.uid);
 
     return  StreamBuilder<CoffeeModel>(
-      stream: Database(uid:user.uid).myCoffee,
+      stream: db.myCoffee,
       builder: (context, snapshot) {
         if(snapshot.hasData){
-          CoffeeModel _myCoffee = snapshot.data;
+        CoffeeModel _myCoffee = snapshot.data;
+        
+        if(loading){
+          return SmallLoading();
+        }
+       
         return Form(
                 key : _form_key,
                 child: 
@@ -76,7 +84,7 @@ class _EditCoffeeFormState extends State<EditCoffeeForm> {
                      min : 100,
                      max : 900,
                      divisions: 8,
-                     activeColor: Colors.brown[strength??100],
+                     activeColor: Colors.brown[strength??_myCoffee.strength],
                      inactiveColor: Colors.brown[200],
                      value : (strength ?? _myCoffee.strength).toDouble(),
                      onChanged: (value) {
@@ -91,6 +99,22 @@ class _EditCoffeeFormState extends State<EditCoffeeForm> {
                      color : Colors.cyan[300],
                      label : Text('Save'),
                      onPressed: () async{
+
+                       setState(() {
+                         loading = true;
+                         sugar = sugar ?? _myCoffee.sugar;
+                         name = name ?? _myCoffee.name;
+                         strength = strength ?? _myCoffee.strength;
+                       });
+
+                       await db.updateUserData(sugar,name,strength);
+
+                      Navigator.of(context).pop();
+                      
+                      setState(() {
+                         loading = false;
+                       });
+                       
                     },
                    ),
                     SizedBox(height : 20),
@@ -100,7 +124,7 @@ class _EditCoffeeFormState extends State<EditCoffeeForm> {
                  )
               ,);
         }
-        return Loading();
+        return Text('Nothing Available.');
       }
     );
   }

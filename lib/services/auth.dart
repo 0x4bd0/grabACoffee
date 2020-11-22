@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_firebase_app/models/user.dart';
+import 'package:flutter_firebase_app/services/database.dart';
 
 
 class AuthService {
@@ -38,6 +39,7 @@ class AuthService {
    try{
      AuthResult res = await _auth.signInWithEmailAndPassword(email: email, password: password);
      FirebaseUser user = res.user;
+     await Database(uid:user.uid).updateUserData('0', 'alpha', 100);
     return {'status':true, user :_user(user)};
     }
     catch(err){
@@ -52,6 +54,9 @@ class AuthService {
     try{
      AuthResult res = await _auth.createUserWithEmailAndPassword(email: email, password: password);
      FirebaseUser user = res.user;
+
+     //create coffee
+     await Database(uid:user.uid).updateUserData('0', 'alpha', 100);
     return {'status':true, user :_user(user)};
     }
     catch(err){

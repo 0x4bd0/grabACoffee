@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_app/models/coffee.dart';
 import 'package:flutter_firebase_app/screens/home/coffees.dart';
 import 'package:flutter_firebase_app/services/auth.dart';
 import 'package:flutter_firebase_app/services/database.dart';
@@ -11,7 +12,7 @@ class Home extends StatelessWidget {
   final _auth = AuthService();
 
   Widget build(BuildContext context) {
-      return StreamProvider<QuerySnapshot>.value(
+      return StreamProvider<List<CoffeeModel>>.value(
       value : Database().coffees,
       child :  Scaffold(
       backgroundColor: Colors.brown[100],

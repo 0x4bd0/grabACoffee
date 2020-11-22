@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_firebase_app/screens/home/coffees.dart';
 import 'package:flutter_firebase_app/services/auth.dart';
+import 'package:flutter_firebase_app/services/database.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Home extends StatelessWidget {
   @override
@@ -7,7 +11,9 @@ class Home extends StatelessWidget {
   final _auth = AuthService();
 
   Widget build(BuildContext context) {
-      return Scaffold(
+      return StreamProvider<QuerySnapshot>.value(
+      value : Database().coffees,
+      child :  Scaffold(
       backgroundColor: Colors.brown[100],
       appBar: AppBar(
         elevation: 0.0,
@@ -24,7 +30,13 @@ class Home extends StatelessWidget {
         ]
         ),
       body: Center(
+        child : CoffeesList()
       ),
+    )
     );
+
   }
+}
+
+class QuerySnapShot {
 }

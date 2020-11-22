@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_firebase_app/screens/home/home.dart';
 
 
 class Database {
@@ -16,6 +17,10 @@ class Database {
     'stength' : strength
   });
 
+  }
+
+  Stream<QuerySnapshot> get coffees {
+    return coffeesCollection.snapshots();
   }
 
 }
